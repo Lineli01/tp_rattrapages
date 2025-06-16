@@ -22,4 +22,12 @@ export class InMemoryWebinarRepository implements IWebinarRepository {
   async create(webinar: Webinar): Promise<void> {
     this.database.push(webinar);
   }
+  async delete(webinar: Webinar): Promise<void> {
+    const index = this.database.findIndex(
+      (w) => w.props.id === webinar.props.id,
+    );
+    if (index !== -1) {
+      this.database.splice(index, 1);
+    }
+  }
 }
